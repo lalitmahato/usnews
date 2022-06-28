@@ -27,8 +27,8 @@ number = status_count
 domain_name = 'https://www.usnews.com/'
 unable_scrap = 0
 
-while number < 20:
-# while number < total_uid:
+# while number < 20:
+while number < total_uid:
     whole_data = {}     # container to store all the data
     flag = 0
     print('\n',number)
