@@ -48,7 +48,7 @@ def admission(admission_page):
     admission_information = {}
     for info in admission_info:
         para = info.find_all('p')
-        if para[0].text != 'UNLOCK WITH COMPASS':
+        if (para[0].text != 'UNLOCK WITH COMPASS') & (len(para) == 2):
             admission_information[Name_Attribute(para[0])] = para[1].text
     
     admission_contact_section = admission_page.find('div', class_='Box-w0dun1-0 DataRow__Row-sc-1udybh3-0 knONpq fPkWrz Display__DataRowBox-h3gn08-1 kwTiaI datarow-list')
@@ -75,14 +75,15 @@ def academics(academics_page):
 
     most_popular_majors = []
     popular_majors = academics_page.find('div', class_='Box-w0dun1-0 DataRow__Row-sc-1udybh3-0 knONpq fPkWrz Display__DataRowBox-h3gn08-1 kwTiaI datarow-table truncated')
-    pop_majors = popular_majors.find_all('li')
-    for m in pop_majors:
-        para = m.find_all('p')
-        if len(para) == 2:
-            most_popular_majors.append({
-                'name': para[0].text,
-                'percentage': para[1].text
-            })
+    if popular_majors != None:
+        pop_majors = popular_majors.find_all('li')
+        for m in pop_majors:
+            para = m.find_all('p')
+            if len(para) == 2:
+                most_popular_majors.append({
+                    'name': para[0].text,
+                    'percentage': para[1].text
+                })
     academics_section['academic_summary'] = academic_paragraph
     academics_section['popular_majors'] = most_popular_majors
     return academics_section
